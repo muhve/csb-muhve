@@ -5,6 +5,8 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Task
+import datetime
+from django.db import connection
 
 
 def index(request):
@@ -40,6 +42,7 @@ class TaskListView(generic.ListView):
 
     def get_queryset(self):
         queryset = Task.objects.filter(user=self.request.user, done=False)
+
         return queryset
 
 class CompletedTaskListView(generic.ListView):
@@ -54,7 +57,11 @@ def add_task(request):
     if request.method == 'POST':
         todo_title = request.POST.get("title")
         todo_desc = request.POST.get("description")
-        Task.objects.create(title=todo_title, description=todo_desc, user=request.user, done=False)
+        timestamp = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M%S')
+        with connection.cursor() as cursor:
+            cursor.execute(f"INSERT INTO my_broken_app_task (title, user_id, done, created_at, updated_at, description) VALUES ('{todo_title}', {request.user.id}, False, '{timestamp}', '{timestamp}', '{todo_desc}')")
+            # juu'), ('injektiotesti', 1, false, '2023-01-01', '2023-01-01', 'juupajuu
+        #Task.objects.create(title=todo_title, description=todo_desc, user=request.user, done=False)
         return redirect("task_list")
     
 def complete_task(request, pk):

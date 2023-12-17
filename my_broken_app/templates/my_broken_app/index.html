@@ -22,20 +22,12 @@
     {% if user.is_authenticated %}
     <p id="welcome-user">Welcome, {{ request.user.username }}</p>
 
-    <ul>
-      <li class="navbar-item">
-        <a class="link" href="{% url 'logout' %}">Logout</a>
-      </li>
-    </ul>
+    <form id="logout-form" method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button type="submit">Log out</button>
+    </form>
     {% else %}
-    <ul>
-      <li>
-        <a class="link" href="{% url 'login' %}">Login</a>
-      </li>
-      <li>
-        <a class="link" href="{% url 'register' %}">Register</a>
-      </li>
-    </ul>
+    <a class="link" href="{% url 'login' %}">Login</a>
     {% endif %}
   </nav>
 
