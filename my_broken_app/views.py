@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
+from django.core.exceptions import PermissionDenied
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Task
 
 
@@ -17,6 +18,16 @@ class RegisterView(generic.CreateView):
 class TaskDetailView(generic.DetailView):
     model = Task
     template_name = "my_broken_app/task_detail.html"
+
+    # def dispatch(self, request, *args, **kwargs):
+    #     obj = self.get_object()
+
+    #     if obj.user != request.user:
+    #         return self.handle_permission_denied()
+    #     return super().dispatch(request, *args, **kwargs)
+    # def handle_permission_denied(self):
+    #     redirect_url = reverse_lazy('task_list')
+    #     return HttpResponseRedirect(redirect_url)
 
 class TaskNew(generic.CreateView):
     model = Task
