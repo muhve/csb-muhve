@@ -1,0 +1,14 @@
+{% extends 'my_broken_app/index.html' %}
+
+{% block content %}
+
+<h2>Tasks</h2>
+<ul>
+  {% for object in object_list %}
+  <li>
+    <a href="{% url 'task_detail' object.id %}" class="">{{ object.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
