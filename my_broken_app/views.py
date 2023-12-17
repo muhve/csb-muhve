@@ -28,12 +28,33 @@ class TaskListView(generic.ListView):
     template_name = "my_broken_app/task_list.html"
 
     def get_queryset(self):
-        queryset = Task.objects.filter(user=self.request.user)
+        queryset = Task.objects.filter(user=self.request.user, done=False)
+        return queryset
+
+class CompletedTaskListView(generic.ListView):
+    model = Task
+    template_name = "my_broken_app/completed_task_list.html"
+
+    def get_queryset(self):
+        queryset = Task.objects.filter(user=self.request.user, done=True)
         return queryset
 
 def add_task(request):
     if request.method == 'POST':
         todo_title = request.POST.get("title")
         todo_desc = request.POST.get("description")
-        task = Task.objects.create(title=todo_title, description=todo_desc, user=request.user, done=False)
+        Task.objects.create(title=todo_title, description=todo_desc, user=request.user, done=False)
+        return redirect("task_list")
+    
+def complete_task(request, pk):
+    if request.method == 'POST':
+        task = Task.objects.get(pk=pk)
+        task.done = True
+        task.save()
+        return redirect("task_list")
+
+def delete_task(request, pk):
+    if request.method == 'POST':
+        task = Task.objects.get(pk=pk)
+        task.delete()
         return redirect("task_list")

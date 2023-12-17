@@ -4,9 +4,11 @@
 
 <form action="{% url 'task_create' %}" method="post">
   {% csrf_token %}
-
-  <input type="text" name="title" id="title" required>
-  <input type="text" name="description" id="description" required>
+  title<br />
+  <input type="text" name="title" id="title" required><br />
+  description<br />
+  <input type="text" name="description" id="description" required><br />
+  <br />
   <button type="submit">Add Todo</button>
 </form>
 

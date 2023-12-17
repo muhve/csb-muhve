@@ -9,6 +9,9 @@ urlpatterns = [
     path("register/", views.RegisterView.as_view(), name="register"),
     path('tasks/<int:pk>/', views.TaskDetailView.as_view(), name='task_detail'),
     path('tasks/', views.TaskListView.as_view(), name='task_list'),
+    path('tasks/completed', views.CompletedTaskListView.as_view(), name='completed_task_list'),
     path('tasks/new', views.TaskNew.as_view(), name='task_new'),
     path('tasks/create', views.add_task, name='task_create'),
+    path('tasks/complete/<int:pk>', views.complete_task, name='task_complete'),
+    path('tasks/delete/<int:pk>', views.delete_task, name='task_delete'),
 ]

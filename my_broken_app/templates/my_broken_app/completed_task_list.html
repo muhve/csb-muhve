@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h2>Todo</h2>
+<h2>Completed tasks</h2>
 <ul>
   {% for object in object_list %}
   <li>
@@ -11,8 +11,5 @@
   {% endfor %}
 </ul>
 
-<a href="{% url 'task_new' %}" class="">New task</a> <br />
-
-<a href="{% url 'completed_task_list' %}" class="">Completed tasks</a>
 
 {% endblock %}
