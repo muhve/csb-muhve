@@ -4,6 +4,6 @@ https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/ set
 
 https://owasp.org/Top10/A03_2021-Injection/ my_broken_app/views.py#61
 
-https://owasp.org/Top10/A05_2021-Security_Misconfiguration/ settings.py#26
+https://owasp.org/Top10/A05_2021-Security_Misconfiguration/ settings.py#27
 
 https://owasp.org/Top10/A02_2021-Cryptographic_Failures/ settings.py#23
