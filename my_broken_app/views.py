@@ -60,7 +60,7 @@ def add_task(request):
         timestamp = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M%S')
         with connection.cursor() as cursor:
             cursor.execute(f"INSERT INTO my_broken_app_task (title, user_id, done, created_at, updated_at, description) VALUES ('{todo_title}', {request.user.id}, False, '{timestamp}', '{timestamp}', '{todo_desc}')")
-            # juu'), ('injektiotesti', 1, false, '2023-01-01', '2023-01-01', 'juupajuu
+
         #Task.objects.create(title=todo_title, description=todo_desc, user=request.user, done=False)
         return redirect("task_list")
     
